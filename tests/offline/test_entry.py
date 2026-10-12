@@ -130,6 +130,11 @@ class T(unittest.TestCase):
             self._test_resolve_slicer()
 
     def _test_resolve_slicer(self):
+        # Pretend the app is installed: these runs must not depend on this machine.
+        with mock.patch.object(posixpath, 'isdir', lambda p: p == '/Applications/Snapmaker Orca.app'):
+            self._check_resolve_slicer()
+
+    def _check_resolve_slicer(self):
         r = entry._resolve_slicer
         self.assertEqual(r('/Applications/Snapmaker Orca.app'), '/Applications/Snapmaker Orca.app')
         self.assertEqual(r('/Applications/Snapmaker Orca.app/'), '/Applications/Snapmaker Orca.app')

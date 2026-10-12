@@ -20,6 +20,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.14'  # the Python version Fusion ships
+      # Each file runs even if an earlier one failed, so every failure shows up.
       - run: python tests/offline/test_entry.py
       - run: python tests/offline/test_color.py
+        if: success() || failure()
       - run: python tests/offline/test_windows.py
+        if: success() || failure()
