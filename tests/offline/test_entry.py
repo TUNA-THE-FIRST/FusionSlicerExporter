@@ -65,7 +65,8 @@ class Sel:
 @contextlib.contextmanager
 def macos():
     """Runs the macOS code paths on any OS (like test_windows.py does for Windows)."""
-    with mock.patch.object(sys, 'platform', 'darwin'), mock.patch.object(os, 'path', posixpath):
+    with mock.patch.object(sys, 'platform', 'darwin'), mock.patch.object(os, 'path', posixpath), \
+         mock.patch.object(os, 'sep', '/'):
         yield
 
 
