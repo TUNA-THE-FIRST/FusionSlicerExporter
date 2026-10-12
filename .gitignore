@@ -1,0 +1,15 @@
+# Build output (tools/make_release.py); releases are built by GitHub Actions
+dist/
+
+# Python
+__pycache__/
+*.pyc
+
+# Remembered dialog settings, personal to each install
+state.json
+
+# Output of the Fusion test scripts
+tests/*/output/
+
+# macOS
+.DS_Store

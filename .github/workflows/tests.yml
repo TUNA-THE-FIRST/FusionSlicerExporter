@@ -1,0 +1,25 @@
+name: tests
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  offline:
+    # Runs the add-in code against a stubbed Fusion API on all three systems.
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'  # the Python version Fusion ships
+      - run: python tests/offline/test_entry.py
+      - run: python tests/offline/test_color.py
+      - run: python tests/offline/test_windows.py

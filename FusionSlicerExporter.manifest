@@ -1,0 +1,14 @@
+{
+	"autodeskProduct":	"Fusion",
+	"type":	"addin",
+	"id":	"691bc909-f20f-48c4-8018-0013822d2593",
+	"author":	"Sinan Bank",
+	"description":	{
+		"":	"Fusion Slicer Exporter: send selected bodies/components, with their Fusion colors, to Snapmaker Orca, Bambu Studio, OrcaSlicer or PrusaSlicer."
+	},
+	"version":	"1.3.0",
+	"runOnStartup":	true,
+	"supportedOS":	"windows|mac",
+	"editEnabled":	true,
+	"iconFilename":	"AddInIcon.svg"
+}

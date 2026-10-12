@@ -1,0 +1,10 @@
+{
+	"autodeskProduct":	"Fusion",
+	"type":	"script",
+	"author":	"",
+	"description":	{
+		"":	"Read-only: lists the appearances on the open design and the colors Fusion Slicer Exporter reads from them."
+	},
+	"supportedOS":	"windows|mac",
+	"editEnabled":	true
+}

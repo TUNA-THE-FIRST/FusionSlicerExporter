@@ -1,0 +1,38 @@
+name: release
+
+# Pushing a version tag (e.g. v1.3.0) builds the Windows and macOS zips from
+# that exact commit and attaches them to a GitHub release, so downloads always
+# match the source in this repository.
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+      - name: Run tests
+        run: |
+          python tests/offline/test_entry.py
+          python tests/offline/test_color.py
+          python tests/offline/test_windows.py
+      - name: Check the tag matches the manifest version
+        run: |
+          version=$(python -c "import json; print(json.load(open('FusionSlicerExporter.manifest'))['version'])")
+          test "v$version" = "$GITHUB_REF_NAME" || { echo "Tag $GITHUB_REF_NAME does not match manifest version $version"; exit 1; }
+      - name: Build zips
+        run: python tools/make_release.py
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" dist/*.zip \
+            --title "Fusion Slicer Exporter $GITHUB_REF_NAME" \
+            --notes "Built by GitHub Actions from commit $GITHUB_SHA. Download the zip for your system and see INSTALL.txt inside, or the README."

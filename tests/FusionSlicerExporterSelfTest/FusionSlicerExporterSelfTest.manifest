@@ -1,0 +1,10 @@
+{
+	"autodeskProduct":	"Fusion",
+	"type":	"script",
+	"author":	"",
+	"description":	{
+		"":	"Self-test for Fusion Slicer Exporter's color export. Creates an unsaved test design."
+	},
+	"supportedOS":	"windows|mac",
+	"editEnabled":	true
+}
